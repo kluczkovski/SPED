@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="col-lg-12">
+   
+    <table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>
+                Codigo IBGE
+            </th>
+
+            <th>
+                UF
+            </th>
+
+            <th>
+                Vigiência Início
+            </th>
+
+            <th>
+                Vigênncia Fim
+            </th>
+
+            <th>
+                Última Atualização
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for uf in ufs %}
+            <tr>
+                <td>
+                    {{ uf.codigo_UF_IBGE }}
+                </td>
+                <td>
+                    {{ uf.sigla_UF_IBGE }}
+                </td>
+                <td>
+                    {{ uf.data_inicio_validade }}
+                </td>
+                <td>
+                    {{ uf.data_fim_validade }}
+                </td>
+                <td>
+                    {{ uf.data_ultima_atualizacao }}
+                </td>
+                 <td>
+                     <a href="#" >
+                         <span class="glyphicon glyphicon-pencil"></span>
+                     </a>
+                     <a href="#" >
+                         <span class="glyphicon glyphicon-remove"></span>
+                     </a>
+                 </td>
+
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+    <a href="#" class="btn btn-primary">
+        Add New Product
+    </a>
+
+</div>
+
+{% endblock content %}
