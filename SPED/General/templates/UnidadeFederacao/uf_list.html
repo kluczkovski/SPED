@@ -68,10 +68,10 @@
                     {{ uf.data_ultima_atualizacao }}
                 </td>
                  <td>
-                     <a href="#" >
+                     <a href="{% url 'uf_edit' uf.id %}" >
                          <span class="glyphicon glyphicon-pencil"></span>
                      </a>
-                     <a href="#" >
+                     <a href="{% url 'uf_delete' uf.id %}">
                          <span class="glyphicon glyphicon-remove"></span>
                      </a>
                  </td>
@@ -85,6 +85,5 @@
 <a href="{% url 'uf_create' %}" class="btn btn-primary">
         Add New Product
 </a>
-
 
 {% endblock content %}

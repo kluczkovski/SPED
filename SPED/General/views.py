@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 
@@ -16,9 +16,31 @@ def unidadeFederacao_list(request, template_name='UnidadeFederacao/uf_list.html'
 
 
 def unidadeFederacao_create(request, template_name='UnidadeFederacao/uf_form.html'):
-     form = UnidadeFederacaoForm(request.POST or None)
-     if form.is_valid():
-         form.save()
-         return redirect('uf_list')
+    form = UnidadeFederacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('uf_list')
 
-     return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form})
+
+
+def unidadeFederacao_edit(request, uf_id, template_name='UnidadeFederacao/uf_form.html'):
+    uf = get_object_or_404(UnidadesFederacao, pk=uf_id)
+    if request.method == "POST":
+        form = UnidadeFederacaoForm(request.POST, instance=uf)
+        if form.is_valid():
+            form.save()
+            return redirect('uf_list')
+    else:
+        form = UnidadeFederacaoForm(instance=uf)
+
+    return render(request, template_name, {'form': form})
+
+
+def unidadeFederacao_delete(request, uf_id, template_name='UnidadeFederacao/uf_delete.html'):
+    uf = get_object_or_404(UnidadesFederacao, pk=uf_id)
+    if request.method == "POST":
+        uf.delete()
+        return redirect('uf_list')
+    return render(request, template_name, {'uf': uf})
+
